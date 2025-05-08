@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: git@github.com:Cassius86/gitops-demo.git
+    repoURL: https://github.com/Cassius86/gitops-demo.git
     targetRevision: HEAD
     path: ./app-of-apps
   destination:
