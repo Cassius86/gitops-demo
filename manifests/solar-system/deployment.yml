@@ -20,7 +20,7 @@ spec:
       containers:
       #- image: siddharth67/solar-system:v3
       #  name: solar-system
-      - image: hoba/todo-list-app
+      - image: prologic/todo
         name: todo-list
         resources: {}
 status: {}
