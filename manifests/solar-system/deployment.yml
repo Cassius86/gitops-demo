@@ -22,3 +22,23 @@ spec:
         name: solar-system
         resources: {}
 status: {}
+
+---
+# service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: solar-system
+  name: solar-system-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: solar-system
+  type: NodePort
+status:
+  loadBalancer: {}
