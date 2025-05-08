@@ -18,10 +18,8 @@ spec:
         app: solar-system
     spec:
       containers:
-      #- image: siddharth67/solar-system:v3
-      #  name: solar-system
-      - image: prologic/todo
-        name: todo-list
+        image: siddharth67/solar-system:v3
+        name: solar-system
         resources: {}
 status: {}
 
