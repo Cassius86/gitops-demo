@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/Cassius86/gitops-demo.git
     targetRevision: HEAD
-    path: manifests/elastic-stack
+    path: ./manifests/elastic-stack
   destination:
     server: https://kubernetes.default.svc
     namespace: elastic-stack
