@@ -19,3 +19,6 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true  # This option helps with CRD application
+      - ApplyOutOfSyncOnly=true  # Only apply resources that are out of sync
+      - Replace=false  # Don't replace resources
