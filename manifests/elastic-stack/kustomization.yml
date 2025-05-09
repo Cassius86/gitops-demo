@@ -1,0 +1,6 @@
+# Add this file to manifests/elastic-stack/kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - es-deployment.yml
+  - kibana-deployment.yml
