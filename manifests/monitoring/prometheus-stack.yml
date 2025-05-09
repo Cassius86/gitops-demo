@@ -19,8 +19,7 @@ spec:
         grafana:
           adminPassword: admin  # Consider using a secret for this in production
           persistence:
-            enabled: true
-            size: 2Gi
+            enabled: false
         prometheus:
           prometheusSpec:
             retention: 3d
