@@ -18,9 +18,9 @@ spec:
         app: solar-system
     spec:
       containers:
-        image: siddharth67/solar-system:v3
-        name: solar-system
-        resources: {}
+        - image: siddharth67/solar-system:v3
+          name: solar-system
+          resources: {}
 status: {}
 
 ---
