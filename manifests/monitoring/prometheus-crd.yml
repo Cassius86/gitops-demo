@@ -1,0 +1,40 @@
+# apps/monitoring/prometheus-crds.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-crds
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://prometheus-community.github.io/helm-charts
+    chart: kube-prometheus-stack
+    targetRevision: 45.7.1
+    helm:
+      releaseName: prometheus-crds
+      skipCrds: false
+      # Only install CRDs and nothing else
+      values: |
+        prometheusOperator:
+          enabled: false
+        prometheus:
+          enabled: false
+        alertmanager:
+          enabled: false
+        grafana:
+          enabled: false
+        nodeExporter:
+          enabled: false
+        kubeStateMetrics:
+          enabled: false
+          
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+  syncPolicy:
+    automated:
+      prune: false  # Important: Don't prune CRDs
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=false
