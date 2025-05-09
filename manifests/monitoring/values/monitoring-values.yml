@@ -1,10 +1,22 @@
-# apps/monitoring/values/prometheus-values.yaml
+# apps/monitoring/values/monitoring-values.yaml
 grafana:
+  adminPassword: admin
+  persistence:
+    enabled: false
   service:
     type: NodePort
-    nodePort: 30300  # Choose an available port
+    nodePort: 30300
 
 prometheus:
-  service:
-    type: NodePort
-    nodePort: 30900  # Choose an available port
+  prometheusSpec:
+    retention: 3d
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 3Gi
+    service:
+      type: NodePort
+      nodePort: 30900

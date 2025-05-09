@@ -14,22 +14,8 @@ spec:
     targetRevision: 45.7.1  # Specify the chart version you want to use
     helm:
       releaseName: prometheus
-      values: |
-        # Custom values for Prometheus and Grafana
-        grafana:
-          adminPassword: admin  # Consider using a secret for this in production
-          persistence:
-            enabled: false
-        prometheus:
-          prometheusSpec:
-            retention: 3d
-            storageSpec:
-              volumeClaimTemplate:
-                spec:
-                  accessModes: ["ReadWriteOnce"]
-                  resources:
-                    requests:
-                      storage: 3Gi
+      valueFiles:
+        - values/monitoring-values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: monitoring  # Creates a dedicated namespace for monitoring
