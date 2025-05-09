@@ -1,0 +1,10 @@
+# apps/monitoring/values/prometheus-values.yaml
+grafana:
+  service:
+    type: NodePort
+    nodePort: 30300  # Choose an available port
+
+prometheus:
+  service:
+    type: NodePort
+    nodePort: 30900  # Choose an available port
