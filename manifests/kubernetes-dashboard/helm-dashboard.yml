@@ -29,7 +29,6 @@ spec:
           nodePort: 30080
         
         extraArgs:
-          - --namespace=""  # Empty string for all namespaces
           - --enable-skip-login
           - --enable-insecure-login
           
