@@ -17,17 +17,39 @@ spec:
         fullnameOverride: "kubernetes-dashboard"
         
         rbac:
-          create: false  # Don't create default RBAC, we'll use our own
+          create: false
         
         serviceAccount:
-          create: false  # Don't create the default service account
-          name: "admin-user"  # Use our admin-user service account
+          create: false
+          name: "admin-user"
         
+        # These settings are critical for insecure access
         protocolHttp: true
+        enableInsecureLogin: true
+        skipLogin: true
+        
+        # Force HTTP protocol throughout
+        app:
+          logLevel: info
+          
+        # Disable TLS settings completely
+        certManager:
+          enabled: false
+        cert-manager:
+          enabled: false
+        
+        # Define HTTP ports explicitly
+        ports:
+          insecurePort: 9090  # Make sure we're using the insecure port
+        
+        # Service configuration
         service:
           type: NodePort
           nodePort: 30080
+          externalPort: 9090  # Match the insecure port
+          internalPort: 9090  # Match the insecure port
         
+        # Extended arguments 
         extraArgs:
           - --enable-skip-login
           - --enable-insecure-login
@@ -36,12 +58,13 @@ spec:
           - --authentication-mode=token
           - --authentication-mode=basic
           - --namespace=kubernetes-dashboard
-        
-        enableInsecureLogin: true
-        skipLogin: true  
-        
-        metricsScraper:
-          enabled: true
+          - --insecure-port=9090
+          - --insecure-bind-address=0.0.0.0
+          
+        # Additional environment variables
+        extraEnv:
+          - name: DASHBOARD_ENABLE_INSECURE_LOGIN
+            value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: kubernetes-dashboard
