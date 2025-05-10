@@ -1,0 +1,19 @@
+# manifests/kubernetes-dashboard/dashboard-instructions.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dashboard-instructions
+  namespace: kubernetes-dashboard
+data:
+  README.md: |
+    # Kubernetes Dashboard Access Instructions
+    
+    The Kubernetes Dashboard is available at:
+    http://<node-ip>:30080
+    
+    To retrieve the access token:
+    ```
+    kubectl -n kubernetes-dashboard get secret admin-user-token -o jsonpath="{.data.token}" | base64 --decode
+    ```
+    
+    Use this token to log in to the dashboard.
