@@ -31,7 +31,9 @@ spec:
         extraArgs:
           - --enable-skip-login
           - --enable-insecure-login
-          
+        
+        enableInsecureLogin: true  
+        
         metricsScraper:
           enabled: true
   destination:
