@@ -31,8 +31,14 @@ spec:
         extraArgs:
           - --enable-skip-login
           - --enable-insecure-login
+          - --disable-settings-authorizer
+          - --token-ttl=0
+          - --authentication-mode=token
+          - --authentication-mode=basic
+          - --namespace=kubernetes-dashboard
         
-        enableInsecureLogin: true  
+        enableInsecureLogin: true
+        skipLogin: true  
         
         metricsScraper:
           enabled: true
