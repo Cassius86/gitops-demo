@@ -1,0 +1,15 @@
+# manifests/kubernetes-dashboard/dashboard-csrf-patch.yml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kubernetes-dashboard-csrf
+  namespace: kubernetes-dashboard
+  labels:
+    app.kubernetes.io/instance: kubernetes-dashboard-helm
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kubernetes-dashboard
+    app.kubernetes.io/version: v2.7.0
+    helm.sh/chart: kubernetes-dashboard-6.0.8
+type: Opaque
+data:
+  csrf: "cmFuZG9tdG9rZW5mb3JkYXNoYm9hcmRjc3JmMTIzNDU2Nzg5MA=="  # Base64 encoded random string

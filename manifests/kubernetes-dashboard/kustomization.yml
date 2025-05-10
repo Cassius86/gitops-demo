@@ -7,3 +7,4 @@ resources:
 - dashboard-admin-user.yml
 - dashboard-token.yml
 - dashboard-instructions.yml
+- dashboard-csrf-patch.yml
