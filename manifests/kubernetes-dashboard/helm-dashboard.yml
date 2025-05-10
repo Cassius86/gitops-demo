@@ -4,7 +4,6 @@ kind: Application
 metadata:
   name: kubernetes-dashboard-helm
   namespace: argocd
-  # This ensures the Application is managed by the parent Application
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
@@ -15,19 +14,27 @@ spec:
     targetRevision: 6.0.8
     helm:
       values: |
+        fullnameOverride: "kubernetes-dashboard"
+        
+        rbac:
+          create: false  # Don't create default RBAC, we'll use our own
+        
         serviceAccount:
-          create: true
-          name: kubernetes-dashboard
+          create: false  # Don't create the default service account
+          name: "admin-user"  # Use our admin-user service account
+        
         protocolHttp: true
         service:
           type: NodePort
           nodePort: 30080
-          externalPort: 80
-        metrics-server:
+        
+        extraArgs:
+          - --namespace=""  # Empty string for all namespaces
+          - --enable-skip-login
+          - --enable-insecure-login
+          
+        metricsScraper:
           enabled: true
-          args:
-            - --kubelet-preferred-address-types=InternalIP
-            - --kubelet-insecure-tls
   destination:
     server: https://kubernetes.default.svc
     namespace: kubernetes-dashboard
