@@ -1,0 +1,37 @@
+# manifests/kubernetes-dashboard/helm-dashboard.yml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kubernetes-dashboard-helm
+  namespace: argocd
+  # This ensures the Application is managed by the parent Application
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/dashboard/
+    chart: kubernetes-dashboard
+    targetRevision: 6.0.8
+    helm:
+      values: |
+        serviceAccount:
+          create: true
+          name: kubernetes-dashboard
+        protocolHttp: true
+        service:
+          type: NodePort
+          nodePort: 30080
+          externalPort: 80
+        metrics-server:
+          enabled: true
+          args:
+            - --kubelet-preferred-address-types=InternalIP
+            - --kubelet-insecure-tls
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kubernetes-dashboard
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
