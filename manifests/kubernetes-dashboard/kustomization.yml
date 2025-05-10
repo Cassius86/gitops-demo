@@ -8,3 +8,4 @@ resources:
 - dashboard-token.yml
 - dashboard-instructions.yml
 - dashboard-csrf-secret.yml
+- auth-user-token.yml
