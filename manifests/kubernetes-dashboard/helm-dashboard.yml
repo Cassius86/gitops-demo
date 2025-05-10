@@ -32,6 +32,7 @@ spec:
           - --namespace=""  # Empty string for all namespaces
           - --enable-skip-login
           - --enable-insecure-login
+          - --csrf-key-file=""
           
         metricsScraper:
           enabled: true
